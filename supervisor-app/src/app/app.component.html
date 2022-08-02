@@ -1,0 +1,76 @@
+<h3>Notification Form</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="supervisorsaveform" #savestudent (ngSubmit)="saveSupervisor(saveSupervisor)">
+        <div class="form-group">
+          <label for="name">First Name</label>
+          <input type="text" class="form-control" formControlName="firstName" data-toggle="tooltip"
+            data-placement="right" title="Enter First Name">
+          <div class="alert alert-danger" *ngIf="(FirstName?.touched) && (FirstName?.invalid)" style="margin-top: 5px;">
+            <span *ngIf="FirstName?.errors">First Name is Required</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName" data-toggle="tooltip"
+            data-placement="right" title="Enter Last Name">
+          <div class="alert alert-danger" *ngIf="(LastName?.touched) && (LastName?.invalid)" style="margin-top: 5px;">
+            <span *ngIf="LastName?.errors">Last Name is Required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name">How would you prefer to be notified?</label>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="emailId" name="emailId" (change)="checkemail()">
+          &nbsp;
+          <label for="name">Email</label>         
+          <input type="text" class="form-control" [attr.disabled]="!isemailRequired" formControlName="email" data-toggle="tooltip"
+           data-placement="right" title="Enter Email"> 
+
+          <div class="alert alert-danger" *ngIf="(email?.touched) && (email?.invalid)" style="margin-top: 5px;">
+            <span *ngIf="email?.errors">Email is Required</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="phone" name="phone"  (change)="checkphone()">
+          &nbsp;
+          <label for="name">Phone No</label>
+          <input type="text" class="form-control" [attr.disabled]="!isphoneRequired" formControlName="phoneNo" data-toggle="tooltip" 
+          data-placement="right" title="Enter Last Name">
+
+          <div class="alert alert-danger" *ngIf="(phoneno?.touched) && (phoneno?.invalid)" style="margin-top: 5px;">
+            <span *ngIf="phoneno?.errors">Phone no is Required</span>
+          </div>
+        </div>
+        <div class="form-group">  
+          <label for="branch">Supervisor</label>  
+            <select class="form-control" formControlName="supervisorLst" data-toggle="tooltip"   
+                  data-placement="right" title="Select"> 
+                  <option>Please Select</option>     
+                <option  *ngFor="let s of SupervisorList ">{{s}}</option>  
+                <option>s</option>
+            </select>  
+      </div>  
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="!submitted">
+      <h4>Supervisor Added SuccessFully!</h4>
+      <button (click)="addSupervisorForm()" class='btn btn-primary'>Add More Supervisors</button>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
